@@ -5,19 +5,20 @@ renderTodoList();
 
 function renderTodoList() {
   let todoListHTML = '';
-  for (let i = 0; i < todoList.length; i++) {
-    const todo = todoList[i];
+
+  todoList.forEach(function(todo, i) {
     const {name, dueDate} = todo;
     const html = `
       <div>${name}</div>
       <div>${dueDate}</div>
       <button onclick="
         todoList.splice(${i}, 1);
-        renderTodoList();      
+        renderTodoList();
       " class="delete-button">Delete</button>
       `;
     todoListHTML += html;
-  }
+  });
+
   document.querySelector('.js-todo-list').innerHTML = todoListHTML;
   localStorage.setItem('todo', JSON.stringify(todoList));
 }
