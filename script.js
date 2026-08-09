@@ -46,11 +46,12 @@ function addTodo() {
     });
 
   inputElem.value = '';
+  dateInputElem.value = '';
   
 	renderTodoList();
 }
 
-function enterButton(event) {
+function handleEnterButton(event) {
   if(event.key === 'Enter') {
     addTodo()
   }
@@ -60,3 +61,10 @@ document.querySelector('.js-add-button')
   .addEventListener('click', () => {
     addTodo();
   })
+
+document.querySelectorAll('.js-input')
+.forEach((input) => {
+  input.addEventListener('keydown', (event) => {
+  handleEnterButton(event);
+  });
+});
