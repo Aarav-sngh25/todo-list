@@ -68,3 +68,10 @@ document.querySelectorAll('.js-input')
   handleEnterButton(event);
   });
 });
+
+document.body.addEventListener('keydown', (event) => {
+  if(event.key === 'Delete') {
+  todoList.splice(todoList.length - 1, 1);
+  renderTodoList();
+  };
+});
