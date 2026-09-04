@@ -1,4 +1,3 @@
-
 body {
   font-family: Arial;
 }
@@ -18,9 +17,11 @@ body {
 }
 
 .name-input,
-.date-input {
+.date-input,
+.edit-input {
   font-size: 15px;
   padding: 6px;
+  box-sizing: border-box;
 }
 
 .add-button {
@@ -29,10 +30,12 @@ body {
   font-size: 15px;
   border: none;
   cursor: pointer;
+  padding: 7px;
 }
 
+.edit-button,
+.confirm-button,
 .delete-button {
-  background-color: darkred;
   color: aliceblue;
   border: none;
   font-size: 15px;
@@ -40,3 +43,25 @@ body {
   padding: 10px;
 }
 
+.edit-button {
+  background-color: rgb(218, 218, 0);
+  color: black;
+}
+
+.confirm-button {
+  background-color: rgb(33, 153, 83);
+}
+
+.delete-button {
+  background-color: darkred;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.todo-actions button {
+  flex: 1;
+  min-width: 0;
+}
