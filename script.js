@@ -11,11 +11,15 @@ function renderTodoList() {
     const html = `
       <div>${
         editingIndex === i
-          ? `<input class="edit-input js-edit-input" 
-        value=${name}>`
+          ? `<input class="edit-input-name js-edit-input-name" 
+        value="${name}">`
           : name
       }</div>
-      <div>${dueDate}</div>
+      <div>${
+        editingIndex === i
+          ? `<input class="edit-input-dueDate js-edit-input-dueDate" value="${dueDate}">`
+          : dueDate
+      }</div>
       ${
         editingIndex === i
           ? `<button class="confirm-button js-confirm-button">Confirm</button>`
@@ -44,15 +48,39 @@ function renderTodoList() {
     });
   });
 
-  if (editingIndex || editingIndex === 0) {
+  if (editingIndex !== undefined) {
     document
       .querySelector(".js-confirm-button")
-      .addEventListener("click", () => {
-        todoList[editingIndex].name =
-          document.querySelector(".js-edit-input").value;
-        editingIndex = undefined;
-        renderTodoList();
+      .addEventListener("click", confirmButton);
+
+    function confirmButton() {
+      todoList[editingIndex].name = document.querySelector(
+        ".js-edit-input-name",
+      ).value;
+      todoList[editingIndex].dueDate = document.querySelector(
+        ".js-edit-input-dueDate",
+      ).value;
+      editingIndex = undefined;
+      renderTodoList();
+    }
+
+    document.querySelectorAll(".js-edit-input-name").forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+        handleEditEnterButton(event);
       });
+    });
+
+    document.querySelectorAll(".js-edit-input-dueDate").forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+        handleEditEnterButton(event);
+      });
+    });
+
+    function handleEditEnterButton(event) {
+      if (event.key === "Enter") {
+        confirmButton();
+      }
+    }
   }
 }
 
